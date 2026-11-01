@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>김밥차기 · Kimbap Kick</title>
+<title>서울 오락실 · Seoul Arcade</title>
 <style>
 :root{--ink:#f6f1ee;--gold:#f2c230;--red:#d6352f;color-scheme:dark}
 html,body{height:100%;margin:0;background:#17265a;color:var(--ink);font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
@@ -16,9 +16,57 @@ p{margin:0 0 20px;line-height:1.55}
 button{font:inherit;font-size:1.1rem;padding:10px 28px;border-radius:999px;border:0;background:var(--red);color:#fff;cursor:pointer}
 button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 #mute{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));width:44px;height:44px;padding:0;font-size:1.3rem;background:rgba(18,14,47,.7);border:1px solid rgba(246,241,238,.4)}
+[hidden]{display:none!important}
+#menu{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:max(24px,env(safe-area-inset-top)) 24px max(24px,env(safe-area-inset-bottom));box-sizing:border-box;background:linear-gradient(#17265a,#6b4a8f 60%,#f08a6a);overflow-y:auto;touch-action:pan-y}
+#menu h2{margin:0 0 8px;color:var(--ink)}
+.pick{display:flex;align-items:center;gap:16px;width:min(92vw,420px);box-sizing:border-box;text-align:left;padding:16px 20px;border-radius:16px;border:2px solid var(--gold);background:rgba(18,14,47,.85);color:var(--ink);font-size:1rem;transition:transform .1s}
+.pick:hover{transform:translateY(-2px)}
+.pick .em{font-size:2.8rem}
+.pick b{display:block;font-size:1.25rem;color:var(--gold);margin-bottom:2px}
+.pick small{opacity:.88;line-height:1.4}
+.back{position:fixed;left:max(12px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom));padding:10px 16px;font-size:.95rem;background:rgba(18,14,47,.7);border:1px solid rgba(246,241,238,.4)}
+#sc{position:fixed;inset:0;overflow-y:auto;touch-action:pan-y;background:linear-gradient(#120e2f,#2a1c5a);padding:max(10px,env(safe-area-inset-top)) 14px max(24px,env(safe-area-inset-bottom));box-sizing:border-box}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;max-width:900px;margin:0 auto 8px}
+.hd h2{margin:0;font-size:1.1rem;color:var(--gold);opacity:1;text-align:center}
+.hd button{padding:8px 14px;font-size:.95rem;background:rgba(246,241,238,.12);border:1px solid rgba(246,241,238,.35)}
+#belt{overflow:hidden;white-space:nowrap;font-size:1.6rem;max-width:900px;margin:0 auto;border-block:2px solid rgba(246,241,238,.2)}
+#belt span{display:inline-block;animation:belt 30s linear infinite}
+@keyframes belt{to{transform:translateX(-50%)}}
+#scb{display:grid;gap:14px;max-width:900px;margin:12px auto 0}
+@media(min-width:760px){#scb{grid-template-columns:1fr 1fr;align-items:start}}
+.stats{text-align:center}
+.stats small{display:block;opacity:.85}
+#sc-count{font-size:clamp(2.2rem,9vw,3.4rem);color:var(--gold);font-weight:bold;line-height:1.1}
+#sc-frenzy{color:#ff8fb3;font-weight:bold;min-height:1.4em}
+#sushi{display:block;margin:10px auto;width:min(48vw,250px);aspect-ratio:1;border-radius:50%;border:6px solid var(--red);background:radial-gradient(circle at 50% 40%,#fff,#e8dfce 70%);box-shadow:0 8px 0 #8d2420,0 14px 30px rgba(0,0,0,.45);font-size:min(24vw,125px);line-height:1;padding:0;cursor:pointer;transition:transform .08s;-webkit-tap-highlight-color:transparent}
+#sushi:active{transform:scale(.93);box-shadow:0 3px 0 #8d2420}
+#sushi.pop{animation:pop .25s}
+@keyframes pop{50%{transform:scale(1.07) rotate(var(--r,4deg))}}
+.shop h3{margin:6px 0 8px;font-size:1rem;color:var(--gold)}
+.item{display:grid;grid-template-columns:auto 1fr auto;column-gap:10px;align-items:center;text-align:left;width:100%;box-sizing:border-box;padding:10px 12px;margin:0 0 8px;border-radius:12px;border:1px solid rgba(246,241,238,.25);background:rgba(246,241,238,.08);color:var(--ink);font-size:1rem}
+.item:disabled{opacity:.45;cursor:not-allowed}
+.item:not(:disabled):hover{background:rgba(242,194,48,.18)}
+.ie{grid-row:1/3;font-size:1.9rem}
+.it{grid-row:1/3}
+.it b{display:block}
+.it small{opacity:.8}
+.ic{grid-column:3;grid-row:1;color:var(--gold);font-weight:bold;text-align:right}
+.io{grid-column:3;grid-row:2;font-size:.85rem;opacity:.85;text-align:right}
+.fl{position:fixed;pointer-events:none;font-weight:bold;font-size:1.4rem;color:#fff;text-shadow:0 2px 6px #000;animation:fl .9s ease-out forwards;transform:translate(-50%,-50%);z-index:5}
+@keyframes fl{to{transform:translate(-50%,-140px);opacity:0}}
+#gold{position:fixed;z-index:6;font-size:3rem;padding:6px 10px;border-radius:50%;background:radial-gradient(#fff6c0,#f2c230);border:0;box-shadow:0 0 30px 10px rgba(242,194,48,.7);animation:gl 1s ease-in-out infinite alternate}
+@keyframes gl{to{transform:scale(1.15) rotate(8deg)}}
+#toast{position:fixed;left:50%;top:max(64px,env(safe-area-inset-top));transform:translateX(-50%);background:var(--gold);color:#241a05;padding:8px 16px;border-radius:999px;font-weight:bold;z-index:7;white-space:nowrap}
 </style>
 </head>
 <body>
+<div id="menu">
+  <h1>서울 오락실</h1>
+  <h2>Seoul Arcade · choose your game</h2>
+  <button class="pick" id="pickKK"><span class="em">🍙</span><span><b>김밥차기 · Kimbap Kick</b><small>Keep the kimbap in the air with your foot. Chase combos and pop banchan.</small></span></button>
+  <button class="pick" id="pickSC"><span class="em">🍣</span><span><b>스시 클리커 · Sushi Clicker</b><small>Click the sushi, buy helpers and upgrades, and catch golden sushi for a frenzy.</small></span></button>
+</div>
+<div id="kk" hidden>
 <canvas id="c" aria-label="Kimbap Kick game"></canvas>
 <button id="mute" aria-label="Toggle sound">🔊</button>
 <div id="card">
@@ -27,11 +75,30 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
   <p id="txt">Keep the kimbap in the air! Slide to stay under it, then tap, click or press Space to kick. Kick close to your foot for a perfect, pop the floating banchan for bonus points, and chain kicks into combos for up to ×5.</p>
   <button id="go" autofocus>Start kicking</button>
 </div>
+<button id="kkBack" class="back">☰ Menu</button></div>
+<div id="sc" hidden>
+  <div class="hd"><button id="scBack">☰ Menu</button><h2>스시 클리커 · Sushi Clicker</h2><button id="scSnd" aria-label="Toggle sound">🔊</button></div>
+  <div id="belt"><span></span></div>
+  <div id="scb">
+    <div class="stats">
+      <div id="sc-count">0</div>
+      <small>sushi</small>
+      <small id="sc-rate"></small>
+      <div id="sc-frenzy"></div>
+      <button id="sushi" aria-label="Click the sushi">🍣</button>
+      <small>Tap the sushi!</small>
+    </div>
+    <div class="shop"><h3>Upgrades</h3><div id="ups"></div><h3>Helpers</h3><div id="gens"></div></div>
+  </div>
+</div>
+<div id="toast" hidden></div>
 <script>
+(function(){
+
 const cv=document.getElementById('c'),ctx=cv.getContext('2d');
 const card=document.getElementById('card'),ttl=document.getElementById('ttl'),sub=document.getElementById('sub'),txt=document.getElementById('txt'),go=document.getElementById('go'),mbtn=document.getElementById('mute');
 const FONT='"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif';
-let W,H,D,ground,clk=0,stars=[];
+const INTRO=txt.textContent;let active=false;let W,H,D,ground,clk=0,stars=[];
 let state='menu',best=0,muted=false,ac;
 try{best=+localStorage.getItem('kimbap-kick-best')||0}catch(e){}
 let player,balls,targets,parts,popups,msgs,kicks,score,combo,maxCombo,cd,gv,tSpawn,shake=0,keys={};
@@ -164,6 +231,7 @@ addEventListener('pointermove',e=>{player&&(player.tx=e.clientX)});
 addEventListener('pointerdown',e=>{if(!player)return;player.tx=e.clientX;if(e.target===cv)kick()});
 const map={ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r'};
 addEventListener('keydown',e=>{
+  if(!active)return;
   if(map[e.key]){keys[map[e.key]]=true;e.preventDefault()}
   else if(e.key===' '&&state==='play'){e.preventDefault();kick()}
   else if(e.key==='m')toggleMute();
@@ -295,6 +363,7 @@ reset();
 let last=performance.now();
 function loop(now){
   const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(!active){requestAnimationFrame(loop);return}
   if(state==='play')update(dt);
   else{
     clk+=dt;player.x+=(player.tx-player.x)*Math.min(1,16*dt);stepFx(dt);
@@ -309,6 +378,130 @@ function loop(now){
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
+window.KK={
+  show(){active=true;size();reset();state='menu';ttl.textContent='김밥차기';sub.textContent='Kimbap Kick';txt.textContent=INTRO;go.textContent='Start kicking';card.hidden=false;last=performance.now();setTimeout(()=>go.focus(),50)},
+  hide(){active=false;keys.l=keys.r=false}
+};
+})();
+(function(){
+const $=id=>document.getElementById(id);
+const GEN=[
+  {id:'cooker',n:'Rice Cooker',e:'🍚',base:15,cps:1},
+  {id:'chef',n:'Sushi Chef',e:'👨‍🍳',base:100,cps:6},
+  {id:'belt',n:'Conveyor Belt',e:'⚙️',base:700,cps:30},
+  {id:'boat',n:'Fishing Boat',e:'🚤',base:5000,cps:160},
+  {id:'market',n:'Fish Market',e:'🐟',base:35000,cps:900},
+  {id:'star',n:'Michelin Star',e:'⭐',base:250000,cps:5500}];
+const UPS=[
+  {id:'knife',n:'Sharp Knife',e:'🔪',d:'+1 per click',cost:25,add:1},
+  {id:'chop',n:'Golden Chopsticks',e:'🥢',d:'Click power ×2',cost:250,cm:2},
+  {id:'wasabi',n:'Fresh Wasabi',e:'🌿',d:'Rice Cookers and Chefs ×2',cost:1000,gen:['cooker','chef']},
+  {id:'blade',n:'Samurai Blade',e:'⚔️',d:'+10 per click',cost:5000,add:10},
+  {id:'soy',n:'Secret Soy Sauce',e:'🍶',d:'Everything ×2',cost:15000,am:2},
+  {id:'dragon',n:'Dragon Roll Recipe',e:'🐉',d:'Everything ×2',cost:200000,am:2}];
+const KEY='sushi-clicker-v1',MS=[100,1e3,1e4,1e5,1e6,1e7];
+let S={sushi:0,total:0,owned:{},ups:{}},frenzy=0,goldT=25,last=performance.now(),saveT=0,click=1,cps=0,snd=true,ac,ms=0,tt;
+try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&typeof d.sushi==='number')S=Object.assign(S,d)}catch(e){}
+while(ms<MS.length&&S.total>=MS[ms])ms++;
+
+function fmt(n){
+  if(n<1000)return n<10?(Math.floor(n*10)/10).toString():Math.floor(n).toString();
+  const u=['K','M','B','T'];let i=-1;
+  while(n>=1000&&i<u.length-1){n/=1000;i++}
+  return n.toFixed(n<10?2:n<100?1:0)+u[i];
+}
+function blip(f,d,t,v){
+  if(!snd)return;
+  try{ac=ac||new AudioContext();const n=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();
+    o.type=t;o.frequency.setValueAtTime(f,n);o.frequency.exponentialRampToValueAtTime(f*1.8,n+d);
+    g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.001,n+d);
+    o.connect(g);g.connect(ac.destination);o.start(n);o.stop(n+d)}catch(e){}
+}
+function toast(m){
+  if($('sc').hidden)return;
+  const t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>{t.hidden=true},2400);
+}
+function calc(){
+  let add=0,cm=1,am=1;const gm={};
+  for(const u of UPS)if(S.ups[u.id]){add+=u.add||0;cm*=u.cm||1;am*=u.am||1;(u.gen||[]).forEach(g=>{gm[g]=(gm[g]||1)*2})}
+  click=(1+add)*cm*am;cps=0;
+  for(const g of GEN)cps+=(S.owned[g.id]||0)*g.cps*(gm[g.id]||1)*am;
+}
+const gc=g=>Math.ceil(g.base*Math.pow(1.15,S.owned[g.id]||0));
+function mk(parent,o,fn){
+  const b=document.createElement('button');b.className='item';
+  b.innerHTML='<span class="ie">'+o.e+'</span><span class="it"><b>'+o.n+'</b><small></small></span><span class="ic"></span><span class="io"></span>';
+  b.onclick=fn;parent.appendChild(b);
+  o.el=b;o.ic=b.querySelector('.ic');o.io=b.querySelector('.io');b.querySelector('small').textContent=o.d||('+'+fmt(o.cps)+' per sec each');
+}
+UPS.forEach(u=>mk($('ups'),u,()=>{
+  if(S.ups[u.id]||S.sushi<u.cost)return;
+  S.sushi-=u.cost;S.ups[u.id]=1;calc();blip(660,.2,'triangle',.12);toast('Bought '+u.n+'!');
+}));
+GEN.forEach(g=>mk($('gens'),g,()=>{
+  const c=gc(g);if(S.sushi<c)return;
+  S.sushi-=c;S.owned[g.id]=(S.owned[g.id]||0)+1;calc();blip(520,.12,'square',.08);
+}));
+
+function float(text,x,y){
+  const d=document.createElement('div');d.className='fl';d.textContent=text;
+  d.style.left=x+'px';d.style.top=y+'px';document.body.appendChild(d);
+  setTimeout(()=>d.remove(),900);
+}
+const sushiBtn=$('sushi');
+sushiBtn.addEventListener('click',e=>{
+  const v=click*(frenzy>0?7:1);S.sushi+=v;S.total+=v;
+  const r=sushiBtn.getBoundingClientRect();
+  float('+'+fmt(v),e.clientX||r.left+r.width/2,e.clientY||r.top+r.height/2);
+  sushiBtn.style.setProperty('--r',(Math.random()*16-8)+'deg');
+  sushiBtn.classList.remove('pop');void sushiBtn.offsetWidth;sushiBtn.classList.add('pop');
+  blip(300+Math.random()*200,.07,'triangle',.08);
+});
+$('scSnd').onclick=e=>{snd=!snd;e.currentTarget.textContent=snd?'🔊':'🔇'};
+const half='🍣 🍤 🍙 🍥 🍱 🍘 '.repeat(10);
+$('belt').firstElementChild.textContent=half+half;
+
+function spawnGold(){
+  if($('gold'))return;
+  const b=document.createElement('button');b.id='gold';b.textContent='🍣';b.setAttribute('aria-label','Golden sushi');
+  b.style.left=(8+Math.random()*70)+'vw';b.style.top=(18+Math.random()*60)+'vh';
+  b.onclick=()=>{frenzy=10;b.remove();blip(880,.3,'sine',.15);toast('🔥 Frenzy! Everything ×7 for 10s')};
+  document.body.appendChild(b);setTimeout(()=>b.remove(),9000);
+}
+function render(){
+  $('sc-count').textContent=fmt(S.sushi);
+  const f=frenzy>0?7:1;
+  $('sc-rate').textContent=fmt(cps*f)+' per sec · '+fmt(click*f)+' per click';
+  $('sc-frenzy').textContent=frenzy>0?'🔥 FRENZY ×7 · '+Math.ceil(frenzy)+'s':'';
+  for(const g of GEN){const c=gc(g);g.el.disabled=S.sushi<c;g.ic.textContent=fmt(c);g.io.textContent='Owned '+(S.owned[g.id]||0)}
+  for(const u of UPS){u.el.hidden=!!S.ups[u.id];u.el.disabled=S.sushi<u.cost;u.ic.textContent=fmt(u.cost)}
+}
+function tick(){
+  const now=performance.now(),dt=Math.min(1,(now-last)/1000);last=now;
+  const f=frenzy>0?7:1;
+  if(frenzy>0)frenzy=Math.max(0,frenzy-dt);
+  const g=cps*f*dt;S.sushi+=g;S.total+=g;
+  if(!$('sc').hidden){goldT-=dt;if(goldT<=0){spawnGold();goldT=35+Math.random()*35}}
+  while(ms<MS.length&&S.total>=MS[ms]){toast('🎉 '+fmt(MS[ms])+' sushi made!');ms++}
+  saveT+=dt;if(saveT>5){saveT=0;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+  if(!$('sc').hidden)render();
+}
+calc();render();setInterval(tick,100);
+})();
+(function(){
+const $=id=>document.getElementById(id);
+function open(w){
+  $('menu').hidden=w!=='menu';$('kk').hidden=w!=='kk';$('sc').hidden=w!=='sc';
+  const g=$('gold');if(g)g.remove();
+  if(w==='kk')KK.show();else KK.hide();
+  if(w==='menu')$('pickKK').focus();
+}
+$('pickKK').onclick=()=>open('kk');
+$('pickSC').onclick=()=>open('sc');
+$('kkBack').onclick=()=>open('menu');
+$('scBack').onclick=()=>open('menu');
+addEventListener('keydown',e=>{if(e.key==='Escape')open('menu')});
+})();
 </script>
 </body>
 </html>
